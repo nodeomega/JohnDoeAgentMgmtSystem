@@ -14,6 +14,10 @@ namespace JohnDoeAgentMgmtSystem.Controllers
     public class CustomersController : ControllerBase
     {
         // GET: api/Customers
+        /// <summary>
+        /// Gets a listing of all Customers.
+        /// </summary>
+        /// <returns>A List of Customers.</returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -43,16 +47,25 @@ namespace JohnDoeAgentMgmtSystem.Controllers
         }
 
         // GET: api/Customers/5
+        /// <summary>
+        /// Gets the specified Customer's data.
+        /// </summary>
+        /// <param name="id">The Customer ID.</param>
+        /// <returns>The data for a given Customer.</returns>
         [HttpGet("{id}", Name = "Get[controller]")]
         public IActionResult Get(int id)
         {
             // Return a 500 error code as getting a single customer wasn't in the exercise parameters.
             // Return a StatusCode object rather than a NotImplementedException for security reasons (do not provide stack trace).
             return StatusCode(500, "Single Customer GET will not be implemented for this exercise.");
-
         }
 
         // POST: api/Customers
+        /// <summary>
+        /// Creates a new Customer
+        /// </summary>
+        /// <param name="value">The new Customer's data in JSON format.</param>
+        /// <returns>The new Customer's data.</returns>
         [HttpPost]
         public IActionResult Post([FromBody] Customer value)
         {
@@ -121,6 +134,12 @@ namespace JohnDoeAgentMgmtSystem.Controllers
         }
 
         // PUT: api/Customers/5
+        /// <summary>
+        /// Updates a Customer.
+        /// </summary>
+        /// <param name="id">The Customer's ID.</param>
+        /// <param name="value">The Customer's updated data in JSON format.</param>
+        /// <returns>The updated Customer's data.</returns>
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Customer value)
         {
@@ -172,6 +191,8 @@ namespace JohnDoeAgentMgmtSystem.Controllers
                 {
                     // If it's not the specified agent, go on to the next.
                     if (t.Id != updateCustomer.Id) continue;
+
+                    // Customer ID not updated for this exercise.  Assuming data integrity rationale.
                     
                     t.AgentId = updateCustomer.AgentId;
                     t.Guid = updateCustomer.Guid;
@@ -209,6 +230,11 @@ namespace JohnDoeAgentMgmtSystem.Controllers
         }
 
         // DELETE: api/Customers/5
+        /// <summary>
+        /// Deletes a Customer.
+        /// </summary>
+        /// <param name="id">The Customer's ID.</param>
+        /// <returns>The data of the Customer that was deleted.</returns>
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

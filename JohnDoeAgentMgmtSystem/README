@@ -10,23 +10,53 @@ The assumption here is that we would want the **agent's** ID to search by for th
 ### CRUD Parameters Not Implemented
 Deletion of agents was not requested in this exercise.  It was reasonable to assume that a DELETE request should return an error stating it was not implemented.  The same was assumed for obtaining a single **customer** by ID for this exercise.
 
+### Agent Customer Listing
+UI is slated to include the customer's name and city/state.  Assumption is this is handled in the UI and not in the API layer.  Full Customer data under the specified Agent is therefore returned.
+
 ## Technology Stack Used
 This exercise uses C# and WebAPI for the API calls, and I have attempted to make this as RESTful as appropriate.
 
+## Questions for Scrum Master/PM
+- Do we need an API method for getting a single Customer's information by ID? (Which was not specifically included in the instructions).
+- Should the IDs of Customers and Agents be updatable, or fixed once added to the system?
+- Will Agent deletion capability be required in the future?
+
 ## Installation of the Demonstration Project
-- Installation on a Windows installation is assumed for these instructions.
+
+### Assumptions for Installation
+- .NET Core 3.0 installed on target Windows machine.
+- *Visual Studio 2019* is being used to build the project.
+- *IIS* and *IIS Express* are not required for these instructions.
+
+### Instructions
+- Build the project in Visual Studio 2019.
+- Select **Build** -> **Publish JohnDoeAgentMgmtSystem**
+- At the **Pick a publish target** window, choose *Folder*
+- Select the **Folder or File Share** to publish the self-contained application to.
+    - **Default:** *bin\Release\netcoreapp3.0\publish\\*
+    - Note that this default is a subfolder in the project directory.
+- Click **Create Profile** and choose a name for the new publish profile.
+- Click **Publish**
+    - The project will build into the specified folder.
+- Run **JohnDoeAgentMgmtSystem.exe** in the specified folder.  The web application will execute and begin listening for requests.
+    - When I ran this, it listened on http://localhost:5000 and https://localhost:5001
+    - Note that you may get security warnings in web browsers when attempting to go to the *https* address as there is unlikely to be a valid HTTPS certificate for localhost.
+- Press Ctrl+C to end the program and shut down the server when you are done.
 
 ## URL Structure Once Installed
 
+### Assumptions
+The following guide assumes that the deployed project is running on http://localhost:5000.
+
 ### Agent List Functions
 #### Listing of all Agents: 
-GET x/api/agents
+GET http://localhost:5000/api/agents
 
 #### Listing of a Single Agent by ID: 
-GET x/api/agents/1313
+GET http://localhost:5000/api/agents/1313
 
 #### Add Agent: 
-POST x/api/agents
+POST http://localhost:5000/api/agents
 
 Example body:
 
@@ -45,7 +75,7 @@ Example body:
     }
 
 #### Update Agent: 
-PUT x/api/agents/1313
+PUT http://localhost:5000/api/agents/1313
 
 Example body:
 
@@ -65,10 +95,10 @@ Example body:
 
 ### Customer List Functions
 #### Listing of all Customers: 
-GET x/api/customers
+GET http://localhost:5000/api/customers
 
 #### Add Customer: 
-POST x/api/customers
+POST http://localhost:5000/api/customers
 
 Example body:
 
@@ -101,7 +131,7 @@ Example body:
     }
 
 #### Update Customer: 
-PUT x/api/customers/999999
+PUT http://localhost:5000/api/customers/999999
 
 Example body:
 
@@ -134,4 +164,4 @@ Example body:
     }
 
 #### Delete Customer: 
-DELETE x/api/customers/999999
+DELETE http://localhost:5000/api/customers/999999
