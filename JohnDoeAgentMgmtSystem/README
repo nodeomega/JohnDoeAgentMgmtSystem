@@ -165,3 +165,8 @@ Example body:
 
 #### Delete Customer: 
 DELETE http://localhost:5000/api/customers/999999
+
+## Example Client-Side Code
+A pair of buttons, one for *View Agents* and another for *View Customers* has been provided as an example of how this API can be called from a front end application.
+- This example functionality is on the home page of the web page project at http://localhost:5000/ (based on running a deployed build as referenced above in **Intallation of the Demonstration Project**).
+- This example does *not* make use of jQuery, but only vanilla JavaScript, to acquire the Agent / Customer listing from the WebAPI depending on which button is clicked.
