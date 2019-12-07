@@ -1,0 +1,137 @@
+﻿# John Doe Agent Management System
+
+## Assumptions Based on Business Criteria
+### ID Numbers
+The assumption is that once an ID is assigned to an entity, it will not be changed.  Thus, updates will not accept the updating of the ID number of the associated entity being updated.  Provided ID numbers in such an instance are used to find the entity in question instead.
+
+### Customers by Agent ID
+The assumption here is that we would want the **agent's** ID to search by for the customer data in this instance, *not* the **customer's** ID.  Thus, it is inappropriate to do a GET on the **customer** API to retrieve the **agent's** customers.  A different URL route is offered for this instance.
+
+### CRUD Parameters Not Implemented
+Deletion of agents was not requested in this exercise.  It was reasonable to assume that a DELETE request should return an error stating it was not implemented.  The same was assumed for obtaining a single **customer** by ID for this exercise.
+
+## Technology Stack Used
+This exercise uses C# and WebAPI for the API calls, and I have attempted to make this as RESTful as appropriate.
+
+## Installation of the Demonstration Project
+- Installation on a Windows installation is assumed for these instructions.
+
+## URL Structure Once Installed
+
+### Agent List Functions
+#### Listing of all Agents: 
+GET x/api/agents
+
+#### Listing of a Single Agent by ID: 
+GET x/api/agents/1313
+
+#### Add Agent: 
+POST x/api/agents
+
+Example body:
+
+    {
+        "_id": 1313,
+        "name": "John Doe",
+        "address": "123 Any Street #200",
+        "city": "Seattle",
+        "state": "WA",
+        "zipCode": "98101",
+        "tier": 111,
+        "phone": {
+            "primary": "555-555-1212",
+            "mobile": "555-444-3333"
+        }
+    }
+
+#### Update Agent: 
+PUT x/api/agents/1313
+
+Example body:
+
+    {
+        "_id": 1313,
+        "name": "Jane Doe",
+        "address": "123 Any Street #200",
+        "city": "Seattle",
+        "state": "WA",
+        "zipCode": "98101",
+        "tier": 99,
+        "phone": {
+            "primary": "555-555-1212",
+            "mobile": "555-444-3333"
+        }
+    }
+
+### Customer List Functions
+#### Listing of all Customers: 
+GET x/api/customers
+
+#### Add Customer: 
+POST x/api/customers
+
+Example body:
+
+    {
+        "_id": 999999,
+        "agent_id": 1313,
+        "guid": "fc8c5845-1e23-4c94-b92c-a60d8a3f098e",
+        "isActive": false,
+        "balance": "$9,234.56",
+        "age": 41,
+        "eyeColor": "blue",
+        "name": {
+            "first": "Jean-Luc",
+            "last": "Picard"
+        },
+        "company": "Enterprise-E",
+        "email": "picard@example.com",
+        "phone": "+1 (999) 888-7777",
+        "address": "Picard Winery, Paris, France, FrenchPostalCode",
+        "registered": "Tuesday, February 14, 2365 6:14 PM",
+        "latitude": "-58.511774",
+        "longitude": "-26.099681",
+        "tags": [
+            "alpha",
+            "bravo",
+            "charlie",
+            "delta",
+            "epsilon"
+        ]
+    }
+
+#### Update Customer: 
+PUT x/api/customers/999999
+
+Example body:
+
+    {
+        "_id": 999999,
+        "agent_id": 1313,
+        "guid": "fc8c5845-1e23-4c94-b92c-a60d8a3f098e",
+        "isActive": false,
+        "balance": "$19,821.00",
+        "age": 55,
+        "eyeColor": "brown",
+        "name": {
+            "first": "William",
+            "last": "Riker"
+        },
+        "company": "Starfleet (Retired)",
+        "email": "wriker@example.com",
+        "phone": "+1 (111) 222-3333",
+        "address": "Riker's Island, Juneau, AK, 99887",
+        "registered": "Tuesday, February 14, 2378 6:14 PM",
+        "latitude": "-58.511774",
+        "longitude": "-26.099681",
+        "tags": [
+            "enterprise",
+            "defiant",
+            "reliant",
+            "excelsior",
+            "titan"
+        ]
+    }
+
+#### Delete Customer: 
+DELETE x/api/customers/999999

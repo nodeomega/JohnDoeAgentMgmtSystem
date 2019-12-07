@@ -150,11 +150,11 @@ namespace JohnDoeAgentMgmtSystem.Controllers
                 // get the values for the new agent.
                 var updateAgent = value;
 
-                var isFound = agentJsonModel.Exists(agent => agent.Id == updateAgent.Id);
+                var isFound = agentJsonModel.Exists(agent => agent.Id == id);
 
                 if (!isFound)
                 {
-                    // If there is already an agent with the specified ID, return a 400 HTTP code and an error message.
+                    // If the agent with the specified ID doesn't exist, return a 400 HTTP code and an error message.
                     return BadRequest($"Unable to update: There is no agent with ID {value.Id}");
                 }
 
@@ -164,6 +164,8 @@ namespace JohnDoeAgentMgmtSystem.Controllers
                 {
                     // If it's not the specified agent, go on to the next.
                     if (t.Id != updateAgent.Id) continue;
+
+                    // I did not implement changing of Agent ID for this exercise to maintain data integrity re: Agent -> Customer
 
                     t.Address = updateAgent.Address;
                     t.City = updateAgent.City;
@@ -181,7 +183,7 @@ namespace JohnDoeAgentMgmtSystem.Controllers
                 // Rewrite the updated file.
                 System.IO.File.WriteAllText(fileName, serializedAgents);
 
-                // Return the inserted agent.
+                // Return the updated agent.
                 return Ok(updateAgent);
             }
             catch (Exception e)
