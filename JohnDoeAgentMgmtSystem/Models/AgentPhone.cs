@@ -9,5 +9,11 @@ namespace JohnDoeAgentMgmtSystem.Models
     {
         public string Primary { get; set; }
         public string Mobile { get; set; }
+
+        //public AgentPhone(string primary, string mobile)
+        //{
+        //    Primary = primary;
+        //    Mobile = mobile;
+        //}
     }
 }
